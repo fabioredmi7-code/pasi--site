@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pasi — Chaque pas compte</title>
+  <meta name="description" content="Pasi compte vos pas chaque jour, simplement.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 90'%3E%3Crect x='6' y='34' width='30' height='46' rx='15' fill='%23378ADD' transform='rotate(-12 21 57)'/%3E%3Crect x='42' y='8' width='30' height='46' rx='15' fill='%231D9E75' transform='rotate(-12 57 31)'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
+  <style>
+    :root {
+      --blue: #378ADD;
+      --teal: #1D9E75;
+      --slate: #1F2937;
+      --mist: #F4F7FA;
+      --grey: #5B6675;
+      --blue-soft: #E6F1FB;
+      --teal-soft: #E1F5EE;
+      --slate-soft: #E5E8EC;
+      --blue-bar: #B5D4F4;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Fredoka', system-ui, sans-serif;
+      color: var(--slate);
+      background: #fff;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:hover { opacity: .75; }
+    h1, h2, h3, p { margin: 0; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    /* En-tête */
+    .site-header { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; padding-top: 24px; padding-bottom: 24px; }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-name { font-size: 32px; font-weight: 600; letter-spacing: 1px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 28px; align-items: center; font-size: 18px; }
+
+    /* Boutons */
+    .btn { display: inline-block; padding: 16px 32px; border-radius: 999px; font-size: 20px; font-weight: 500; }
+    .btn-dark { background: var(--slate); color: #fff; }
+    .btn-outline { border: 2px solid var(--slate); padding: 14px 30px; }
+    .btn-light { background: #fff; color: var(--slate); font-weight: 600; padding: 16px 36px; }
+    .btn-small { padding: 12px 22px; font-size: 18px; }
+
+    /* Accueil */
+    .hero { background: var(--mist); }
+    .hero-inner { display: flex; flex-wrap: wrap; gap: 48px; align-items: center; padding-top: 64px; padding-bottom: 64px; }
+    .hero-text { flex: 1 1 380px; display: flex; flex-direction: column; gap: 24px; }
+    .hero h1 { font-size: clamp(44px, 7vw, 72px); line-height: 1.05; font-weight: 700; }
+    .hero p { font-size: 22px; line-height: 1.5; color: var(--grey); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; }
+    .hero-visual { flex: 1 1 320px; display: flex; justify-content: center; }
+
+    /* Maquette de téléphone */
+    .phone { width: 280px; height: 540px; background: var(--slate); border-radius: 44px; padding: 12px; }
+    .screen { width: 100%; height: 100%; background: #fff; border-radius: 34px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; }
+    .ring { position: relative; width: 180px; height: 180px; }
+    .ring-label { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .ring-count { font-size: 40px; font-weight: 700; }
+    .ring-caption { font-size: 15px; color: var(--grey); }
+    .bars { display: flex; gap: 10px; align-items: flex-end; height: 70px; }
+    .bars span { width: 20px; border-radius: 10px; background: var(--blue-bar); }
+    .bars span:last-child { background: var(--teal); }
+
+    /* Sections */
+    section { padding: 88px 0; }
+    h2 { font-size: 44px; font-weight: 600; margin-bottom: 40px; }
+    .cards { display: flex; flex-wrap: wrap; gap: 24px; }
+    .card { flex: 1 1 280px; background: var(--mist); border-radius: 24px; padding: 32px; }
+    .card h3 { font-size: 26px; font-weight: 600; margin: 20px 0 8px; }
+    .card p { font-size: 18px; line-height: 1.5; color: var(--grey); }
+    .icon { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; }
+    .icon i { display: block; width: 20px; height: 30px; border-radius: 10px; transform: rotate(-12deg); }
+
+    .steps-section { background: var(--mist); }
+    .steps { display: flex; flex-wrap: wrap; gap: 24px; }
+    .step { flex: 1 1 280px; display: flex; gap: 20px; }
+    .step-num { flex: none; width: 48px; height: 48px; border-radius: 999px; background: var(--slate); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 600; }
+    .step h3 { font-size: 24px; font-weight: 600; margin-bottom: 6px; }
+    .step p { font-size: 18px; line-height: 1.5; color: var(--grey); }
+
+    .cta { background: var(--slate); color: #fff; text-align: center; }
+    .cta .container { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+    .cta h2 { font-size: clamp(36px, 5vw, 52px); font-weight: 700; margin: 0; }
+    .cta p { font-size: 20px; color: #D5DCE4; }
+
+    /* Pied de page */
+    .site-footer { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; padding-top: 32px; padding-bottom: 32px; color: var(--grey); font-size: 16px; }
+    .site-footer .brand-name { font-size: 20px; color: var(--slate); }
+
+    @media (max-width: 600px) {
+      section { padding: 56px 0; }
+      h2 { font-size: 34px; }
+      .nav { gap: 16px; font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Symbole du logo (réutilisé partout) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="steps" viewBox="0 0 80 90">
+      <rect x="6" y="34" width="30" height="46" rx="15" fill="#378ADD" transform="rotate(-12 21 57)"/>
+      <rect x="42" y="8" width="30" height="46" rx="15" fill="#1D9E75" transform="rotate(-12 57 31)"/>
+    </symbol>
+  </svg>
+
+  <header class="container site-header">
+    <a href="#top" class="brand" aria-label="Pasi, retour à l'accueil">
+      <svg width="32" height="36" aria-hidden="true"><use href="#steps"/></svg>
+      <span class="brand-name">pasi</span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#fonctionnalites">Fonctionnalités</a>
+      <a href="#comment">Comment ça marche</a>
+      <a href="#telecharger" class="btn btn-dark btn-small">Télécharger</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="top" class="hero" style="padding:0">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <h1>Chaque pas compte.</h1>
+          <p>Pasi compte vos pas chaque jour, simplement. Ouvrez l'appli, marchez comme d'habitude et regardez votre journée s'additionner.</p>
+          <div class="hero-actions">
+            <a href="#telecharger" class="btn btn-dark">Télécharger l'appli</a>
+            <a href="#fonctionnalites" class="btn btn-outline">Découvrir</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="phone">
+            <div class="screen">
+              <div class="ring">
+                <svg width="180" height="180" viewBox="0 0 180 180" role="img" aria-label="Anneau de progression des pas du jour">
+                  <circle cx="90" cy="90" r="74" fill="none" stroke="#E6F1FB" stroke-width="16"/>
+                  <circle cx="90" cy="90" r="74" fill="none" stroke="#378ADD" stroke-width="16" stroke-linecap="round" stroke-dasharray="465" stroke-dashoffset="140" transform="rotate(-90 90 90)"/>
+                </svg>
+                <div class="ring-label">
+                  <div class="ring-count">7 842</div>
+                  <div class="ring-caption">pas aujourd'hui</div>
+                </div>
+              </div>
+              <div class="bars" aria-hidden="true">
+                <span style="height:34px"></span><span style="height:52px"></span><span style="height:40px"></span>
+                <span style="height:66px"></span><span style="height:46px"></span><span style="height:58px"></span>
+                <span style="height:62px"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fonctionnalites">
+      <div class="container">
+        <h2>Simple, du matin au soir</h2>
+        <div class="cards">
+          <article class="card">
+            <div class="icon" style="background:var(--blue-soft)" aria-hidden="true"><i style="background:var(--blue)"></i></div>
+            <h3>Comptage automatique</h3>
+            <p>Vos pas sont comptés pendant que vous marchez. Rien à lancer, rien à penser.</p>
+          </article>
+          <article class="card">
+            <div class="icon" style="background:var(--teal-soft)" aria-hidden="true"><i style="background:var(--teal)"></i></div>
+            <h3>Un total par jour</h3>
+            <p>Ouvrez l'appli et voyez tout de suite combien de pas vous avez faits aujourd'hui.</p>
+          </article>
+          <article class="card">
+            <div class="icon" style="background:var(--slate-soft)" aria-hidden="true"><i style="background:var(--slate)"></i></div>
+            <h3>L'historique de vos journées</h3>
+            <p>Retrouvez vos jours précédents et comparez-les d'un coup d'œil.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="comment" class="steps-section">
+      <div class="container">
+        <h2>Comment ça marche</h2>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div><h3>Installez Pasi</h3><p>Téléchargez l'appli sur votre téléphone.</p></div></div>
+          <div class="step"><div class="step-num">2</div><div><h3>Marchez</h3><p>Gardez votre téléphone sur vous, comme d'habitude.</p></div></div>
+          <div class="step"><div class="step-num">3</div><div><h3>Suivez vos pas</h3><p>Consultez votre total du jour à tout moment.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="telecharger" class="cta">
+      <div class="container">
+        <h2>Prêt à faire le premier pas ?</h2>
+        <p>Téléchargez Pasi et commencez à compter dès aujourd'hui.</p>
+        <!-- Remplacez href par vos liens App Store / Google Play -->
+        <a href="#top" class="btn btn-light">Télécharger l'appli</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container site-footer">
+    <div class="brand">
+      <svg width="22" height="25" aria-hidden="true"><use href="#steps"/></svg>
+      <span class="brand-name">pasi</span>
+    </div>
+    <div>© 2026 Pasi. Tous droits réservés.</div>
+  </footer>
+</body>
+</html>
